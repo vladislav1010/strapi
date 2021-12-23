@@ -368,11 +368,13 @@ const DataManagerProvider = ({
     });
   };
 
-  const setModifiedData = () => {
+  // 1 refactor
+  const setModifiedData = (props) => {
     const currentSchemas = isInContentTypeView ? contentTypes : components;
-    const schemaToSet = get(currentSchemas, currentUid, {
+    const schemaToSet = get(currentSchemas.concat(props.additionalSchemas), currentUid, {
       schema: { attributes: [] },
     });
+    // refactor also down the line
 
     const retrievedComponents = retrieveComponentsFromSchema(
       schemaToSet.schema.attributes,
