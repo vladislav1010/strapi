@@ -75,6 +75,24 @@ import { action } from '../../../../../admin/server/services';
 /* eslint-disable indent */
 /* eslint-disable react/no-array-index-key */
 
+function saveTacosDataStoreBinding(modalType, actionType, anotherDataSchema, pathToSchema) {
+  if (modalType === 'abracadabra' && actionType === 'edit') {
+    const data = get(anotherDataSchema, pathToSchema, {});
+
+    // The same as in edit component
+    dispatch({
+      type: SET_DATA_TO_EDIT,
+      actionType,
+      modalType,
+      data: {
+        displayName: data.schema.displayName,
+        category: data.category,
+        icon: data.schema.icon,
+      },
+    });
+  }
+}
+
 const FormModal = () => {
   const {
     onCloseModal,
@@ -222,21 +240,8 @@ const FormModal = () => {
         // ...
       }
 
-      if (modalType === 'abracadabra' && actionType === 'edit') {
-        const data = get(anotherDataSchema, pathToSchema, {});
-
-        // The same as in edit component
-        dispatch({
-          type: SET_DATA_TO_EDIT,
-          actionType,
-          modalType,
-          data: {
-            displayName: data.schema.displayName,
-            category: data.category,
-            icon: data.schema.icon,
-          },
-        });
-      }
+      // 1 refactoring
+      saveTacosDataStoreBinding(modalType, actionType, anotherDataSchema, pathToSchema)
 
       if (modalType === 'abracadabra' && actionType === 'create') {
         // ...
