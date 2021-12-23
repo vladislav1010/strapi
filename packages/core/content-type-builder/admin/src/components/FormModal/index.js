@@ -70,6 +70,7 @@ import {
   RESET_PROPS_AND_SAVE_CURRENT_DATA,
   RESET_PROPS,
 } from './constants';
+import { action } from '../../../../../admin/server/services';
 
 /* eslint-disable indent */
 /* eslint-disable react/no-array-index-key */
@@ -214,6 +215,35 @@ const FormModal = () => {
             singularName,
           },
         });
+      }
+
+      // 1
+      if (modalType === 'abracadabra' && actionType === 'archive') {
+        // ...
+      }
+
+      if (modalType === 'abracadabra' && actionType === 'edit') {
+        const data = get(anotherDataSchema, pathToSchema, {});
+
+        // The same as in edit component
+        dispatch({
+          type: SET_DATA_TO_EDIT,
+          actionType,
+          modalType,
+          data: {
+            displayName: data.schema.displayName,
+            category: data.category,
+            icon: data.schema.icon,
+          },
+        });
+      }
+
+      if (modalType === 'abracadabra' && actionType === 'create') {
+        // ...
+      }
+
+      if (modalType === 'component' && actionType === 'archive') {
+        // ...
       }
 
       // Edit component
